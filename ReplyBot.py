@@ -1,4 +1,4 @@
-import tweepy, time, requests, json, os, config
+import tweepy, time, requests, json, config
 # author Seth Walter
 # Twitter bot that replies to tweets that mention the bot and the 
 # hashtag 'weather' with the current temperature of Harrisonburg, VA
