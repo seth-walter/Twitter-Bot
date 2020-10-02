@@ -3,8 +3,6 @@ from datetime import datetime
 
 print('This is a twitter bot')
 
-minutes = datetime.now().minute
-
 from config import CONSUMER_KEY
 from config import CONSUMER_SECRET
 from config import ACCESS_KEY
@@ -22,7 +20,7 @@ x = response.json()
 if x['cod'] != '404':
     y = x['main']
     #convert Kelving to Farhenheit
-    current_temp = round((y['temp'] - 273.15) * 9/5 + 32)
+    current_temp = round((y['temp'] - 273.15) * 9/5 + 32, 2)
     z = x['weather']
     weather_desciption = z[0]['description']
 else:
@@ -30,7 +28,9 @@ else:
 
 def tweet():
     print('Checking time')
-    if minutes == 0 or minutes == 30:
+    minutes = datetime.now().minute
+    if minutes == 0:
+        print('Tweeting weather update')
         api.update_status(weather_desciption + ' with a current temperature of ' + str(current_temp) + 
             ' degrees Fahrenheit in Harrisonburg, VA')
 
