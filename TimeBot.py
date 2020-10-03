@@ -9,6 +9,9 @@ from config import ACCESS_KEY
 from config import ACCESS_SECRET
 from config import WEATHER_KEY
 
+weather_description = ''
+current_temp = ''
+
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
@@ -23,22 +26,22 @@ def get_weather():
         #convert Kelving to Farhenheit
         current_temp = round((y['temp'] - 273.15) * 9/5 + 32, 2)
         z = x['weather']
-        weather_desciption = z[0]['description']
-else:
-    print('City Not Found')
+        weather_description = z[0]['description']
+    else:
+        print('City Not Found')
 
 def tweet():
     print('Checking time')
     try:
         minutes = datetime.now().minute
-        if minutes == 0 or minutes == 30:
+        if minutes == 0 or minutes == 13:
             print('Tweeting weather update')
             for status in tweepy.Cursor(api.user_timeline).items():
                 try:
                     api.destroy_status(status.id)
                 except:
                     pass
-            api.update_status(weather_desciption + ' with a current temperature of ' + str(current_temp) + 
+            api.update_status(weather_description + ' with a current temperature of ' + str(current_temp) + 
                 ' degrees Fahrenheit in Harrisonburg, VA')
     except tweepy.TweepError as e:
         print(e.reason)
