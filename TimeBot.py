@@ -34,7 +34,7 @@ def tweet():
     print('Checking time')
     try:
         minutes = datetime.now().minute
-        if minutes == 0 or minutes == 13:
+        if minutes == 0 or minutes == 30:
             print('Tweeting weather update')
             for status in tweepy.Cursor(api.user_timeline).items():
                 try:
