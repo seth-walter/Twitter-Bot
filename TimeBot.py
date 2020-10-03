@@ -15,11 +15,11 @@ api = tweepy.API(auth)
 
 BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?'
 COMPLETE_URL = BASE_URL + "appid=" + WEATHER_KEY + '&q=' + 'Harrisonburg'
-response = requests.get(COMPLETE_URL)
-x = response.json()
 
 def tweet():
     print('Checking time')
+    response = requests.get(COMPLETE_URL)
+    x = response.json()
     if x['cod'] != '404':
         y = x['main']
         #convert Kelving to Farhenheit
