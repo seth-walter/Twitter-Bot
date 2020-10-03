@@ -9,9 +9,6 @@ from config import ACCESS_KEY
 from config import ACCESS_SECRET
 from config import WEATHER_KEY
 
-weather_description = ''
-current_temp = ''
-
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
@@ -20,7 +17,9 @@ BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?'
 COMPLETE_URL = BASE_URL + "appid=" + WEATHER_KEY + '&q=' + 'Harrisonburg'
 response = requests.get(COMPLETE_URL)
 x = response.json()
-def get_weather():
+
+def tweet():
+    print('Checking time')
     if x['cod'] != '404':
         y = x['main']
         #convert Kelving to Farhenheit
@@ -29,9 +28,6 @@ def get_weather():
         weather_description = z[0]['description']
     else:
         print('City Not Found')
-
-def tweet():
-    print('Checking time')
     try:
         minutes = datetime.now().minute
         if minutes == 0 or minutes == 30:
@@ -47,6 +43,5 @@ def tweet():
         print(e.reason)
 
 while True:
-    get_weather()
     tweet()
     time.sleep(60)
