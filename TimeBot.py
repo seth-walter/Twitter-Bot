@@ -23,7 +23,7 @@ def tweet():
     if x['cod'] != '404':
         y = x['main']
         #convert Kelving to Farhenheit
-        current_temp = round((y['temp'] - 273.15) * 9/5 + 32, 2)
+        current_temp = round((y['temp'] - 273.15) * 9/5 + 32, 1)
         z = x['weather']
         weather_description = z[0]['description']
     else:
