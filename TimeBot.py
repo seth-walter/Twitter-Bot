@@ -3,23 +3,28 @@ from datetime import datetime
 
 print('This is a twitter bot')
 
+#Import API keys from hidde file
 from config import CONSUMER_KEY
 from config import CONSUMER_SECRET
 from config import ACCESS_KEY
 from config import ACCESS_SECRET
 from config import WEATHER_KEY
 
+#Setup twitter API
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 
+#Setup OpenWeatherMap API
 BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?'
 COMPLETE_URL = BASE_URL + "appid=" + WEATHER_KEY + '&q=' + 'Harrisonburg'
 
+#Function to tweet weather
 def tweet():
     print('Checking time')
     response = requests.get(COMPLETE_URL)
     x = response.json()
+    #Getting weather data from OpeanWeatherMap
     if x['cod'] != '404':
         y = x['main']
         #convert Kelving to Farhenheit
@@ -32,6 +37,7 @@ def tweet():
         minutes = datetime.now().minute
         if minutes == 0 or minutes == 30:
             print('Tweeting weather update')
+            #Deletes current tweet and replaces it with newest tweet
             for status in tweepy.Cursor(api.user_timeline).items():
                 try:
                     api.destroy_status(status.id)
