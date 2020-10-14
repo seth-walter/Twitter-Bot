@@ -25,7 +25,7 @@ response = requests.get(COMPLETE_URL)
 x = response.json()
 if x['cod'] != '404':
     y = x['main']
-    #convert Kelving to Farhenheit
+    #convert Kelvin to Farhenheit
     current_temp = round((y['temp'] - 273.15) * 9/5 + 32)
     z = x['weather']
     weather_desciption = z[0]['description']
