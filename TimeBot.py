@@ -1,9 +1,13 @@
 import tweepy, config, requests, json, time
 from datetime import datetime
+# author Seth Walter
+# Twitter bot that tweets the weather and a short description of Harrisonburg, VA
+# every 30 minutes.
+# TODO add functionality for more cities
 
 print('This is a twitter bot')
 
-#Import API keys from hidde file
+#Import API keys from hidden file
 from config import CONSUMER_KEY
 from config import CONSUMER_SECRET
 from config import ACCESS_KEY
@@ -27,7 +31,7 @@ def tweet():
     #Getting weather data from OpeanWeatherMap
     if x['cod'] != '404':
         y = x['main']
-        #convert Kelving to Farhenheit
+        #convert Kelvin to Farhenheit
         current_temp = round((y['temp'] - 273.15) * 9/5 + 32, 1)
         z = x['weather']
         weather_description = z[0]['description']
