@@ -5,7 +5,7 @@ import tweepy, time, requests, json, config
 # TODO add functionality for more cities, add descriptive weather to tweets
 # also add daily tweets about the weather for JMU.
 
-##CURRENTLY NOT FUNCTIONAL DUE TO TWITTER RESTRICTIONS
+##CURRENTLY NOT FUNCTIONAL DUE TO TWITTER RESTRICTIONS ON NEW ACCOUNTS
 
 print("This is a twitter Bot")
 
